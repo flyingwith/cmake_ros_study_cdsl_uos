@@ -123,3 +123,67 @@ CMake and ROS Study on CDSL of UOS
     - VS Code > File > Open Folder... > root/source
       - `root/source` is the directory we cloned from the GitHub before.
     - VS Code > File > Save Workspace As... > Save
+
+## CMake Study
+
+### Example 1: print "Hello World!"
+
+- Add two files `main.cpp` and `CMakeLists.txt` to the source directory.
+- `source/main.cpp`
+  ```cpp
+  #include <iostream>
+
+  int main(int argv, char* argc[])
+  {
+      std::cout << "Hello World!\n";
+      
+      return 0;
+  }
+  ```
+- `source/CMakeLists.txt`
+  ```cmake
+  cmake_minimum_required(VERSION 3.19.0)
+
+  project(cmake_ros_study)
+
+  set(APP_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+  set(APP_INSTALL_DIR ${APP_ROOT_DIR}/install)
+
+  add_executable(${PROJECT_NAME} main.cpp)
+
+  install(
+      TARGETS ${PROJECT_NAME}
+      DESTINATION "${APP_INSTALL_DIR}"
+  )
+  ```
+- We will practice two ways to compile/build/install the C++ program by using CMake.
+- Method 1: Command-Line Interface (CLI)
+  - Open the terminal and run the following commands:
+    ```
+    $ cd go/to/the/root/directory
+    $ mkdir build
+    $ cd build
+    $ cmake ../source     # It generates build/Makefile.
+    $ make                # It generates the executable build/cmake_ros_study.
+    $ make install        # It copies the executable to the install directory.
+    ```
+  - After running these commands, the directory structure should be like the below:
+    ```
+    root/
+    |- build/
+        |- Makefile
+        |- cmake_ros_study
+        |- ...
+    |- install/
+        |- cmake_ros_study
+    |- source/
+        |- README.md
+        |- CMakeLists.txt
+        |- ...
+    ```
+  - Check if the program works fine by running the executable `install/cmake_ros_study`.
+- Method 2: Visual Studio Code
+  - In vscode, open the `Command Palette` by typing Ctrl+Shift+P on Ubuntu/Windows and Cmd+Shift+P on macOS.
+  - type cmake and run `CMake: Configure`.
+  - On the same way, run `CMake: Build` and `CMake: Install` in the order named.
+  - Check the directory structure and the executable as before.
