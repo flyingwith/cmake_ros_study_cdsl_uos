@@ -1,8 +1,9 @@
 #include <iostream>
+#include "simulation.h"
 
 int main(int argv, char* argc[])
 {
-    std::cout << "Hello World!\n";
-    
+    Simulation sim;
+
     return 0;
 }

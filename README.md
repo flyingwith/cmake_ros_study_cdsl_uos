@@ -156,6 +156,7 @@ CMake and ROS Study on CDSL of UOS
       DESTINATION "${APP_INSTALL_DIR}"
   )
   ```
+  - The minimum cmake version shouldn't be greater than the installed cmake version.
 - We will practice two ways to compile/build/install the C++ program by using CMake.
 - Method 1: Command-Line Interface (CLI)
   - Open the terminal and run the following commands:
@@ -187,3 +188,120 @@ CMake and ROS Study on CDSL of UOS
   - type cmake and run `CMake: Configure`.
   - On the same way, run `CMake: Build` and `CMake: Install` in the order named.
   - Check the directory structure and the executable as before.
+
+### Example 2: build a library
+
+- Add two files `simulation.h` and `simulation.cpp` to the source directory and modify `source/main.cpp` and `source/CMakeLists.txt`.
+- `source/simulation.h`
+  ```cpp
+  #ifndef SIMULATION_H
+  #define SIMULATION_H
+
+  class Simulation
+  {
+  public:
+      Simulation();
+      ~Simulation();
+  };
+
+  #endif // SIMULATION_H
+  ```
+- `source/simulation.cpp`
+  ```cpp
+  #include <iostream>
+  #include "simulation.h"
+
+  Simulation::Simulation()
+  {
+      std::cout << "Simulation Constructor\n";
+  }
+
+  Simulation::~Simulation()
+  {
+      std::cout << "Simulation Destructor\n";
+  }
+  ```
+- `source/main.cpp`
+  ```cpp
+  #include <iostream>
+  #include "simulation.h"
+
+  int main(int argv, char* argc[])
+  {
+      Simulation sim;
+
+      return 0;
+  }
+  ```
+- `source/CMakeLists.txt`
+  ```cmake
+  cmake_minimum_required(VERSION 3.19.0)
+
+  project(cmake_ros_study)
+
+  # ==============================================================================
+  # setup cmake
+
+  set(APP_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+  set(APP_LIBRARY_DIR ${APP_ROOT_DIR}/library)
+  set(APP_INSTALL_DIR ${APP_ROOT_DIR}/install)
+
+  # ==============================================================================
+  # library
+
+  add_library(simulation simulation.cpp)
+  install(
+      FILES simulation.h
+      DESTINATION "${APP_LIBRARY_DIR}/include/simulation"
+  )
+  install(
+      TARGETS simulation
+      DESTINATION "${APP_LIBRARY_DIR}/lib"
+  )
+
+  # ==============================================================================
+  # executable
+
+  add_executable(${PROJECT_NAME} main.cpp)
+  target_include_directories(${PROJECT_NAME}
+      PUBLIC "${APP_LIBRARY_DIR}/include/simulation"
+  )
+  target_link_directories(${PROJECT_NAME}
+      PUBLIC "${APP_LIBRARY_DIR}/lib"
+  )
+  target_link_libraries(${PROJECT_NAME}
+      PUBLIC simulation
+  )
+  install(
+      TARGETS ${PROJECT_NAME}
+      DESTINATION "${APP_INSTALL_DIR}"
+  )
+  ```
+- Build and install the program by following one of the two methods introduced in Example 1.
+- After the installation, the directory structure should be like below:
+  ```
+  root/
+  |- build/
+      |- Makefile
+      |- cmake_ros_study
+      |- ...
+  |- install/
+      |- cmake_ros_study
+  |- library/
+      |- include/
+          |- simulation/
+              |- simulation.h
+      |- lib/
+          |- libsimulation.a      # The library file name can be different for Linux and Windows.
+  |- source/
+      |- README.md
+      |- CMakeLists.txt
+      |- ...
+  ```
+- Test the program by running `install/cmake_ros_study`:
+  ```
+  $ cd go/to/root/install
+  $ ./cmake_ros_study
+  Simulation Constructor
+  Simulation Destructor
+  ```
