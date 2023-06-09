@@ -374,3 +374,7 @@ CMake and ROS Study on CDSL of UOS
       |- CMakeLists.txt
       |- ...
   ```
+
+### Example 4: add Eigen math library
+
+- Download [Eigen library](https://eigen.tuxfamily.org/index.php?title=Main_Page) and extract to the directory `root/library/eigen-3.4.0`.

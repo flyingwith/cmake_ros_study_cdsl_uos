@@ -12,11 +12,14 @@ set(APP_LIBRARY_DIR ${APP_ROOT_DIR}/library)
 set(APP_INSTALL_DIR ${APP_ROOT_DIR}/install)
 
 # ==============================================================================
-# library
+# Eigen library
+
+include_directories(${APP_LIBRARY_DIR}/eigen-3.4.0)
+
+# ==============================================================================
+# simulation
 
 add_subdirectory(sim)
-
-# include_directories(${APP_SOURCE_DIR}/sim)
 
 # ==============================================================================
 # executable
