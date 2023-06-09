@@ -4,6 +4,8 @@
 #include "Eigen/Dense"
 using namespace Eigen;
 
+#include "Array.hh"
+
 class Simulation
 {
 public:

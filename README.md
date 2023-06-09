@@ -378,3 +378,17 @@ CMake and ROS Study on CDSL of UOS
 ### Example 4: add Eigen math library
 
 - Download [Eigen library](https://eigen.tuxfamily.org/index.php?title=Main_Page) and extract to the directory `root/library/eigen-3.4.0`.
+
+
+### Example 5:
+
+### Example 6: add QuadProg++
+
+- Download [QuadProg++](https://github.com/liuq/QuadProgpp)
+  ```
+  $ mkdir build
+  $ cd build
+  $ cmake -DCMAKE_INSTALL_PREFIX=../ ../source
+  $ make
+  $ make install
+  ```
