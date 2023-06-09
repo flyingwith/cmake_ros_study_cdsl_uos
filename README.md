@@ -308,3 +308,69 @@ CMake and ROS Study on CDSL of UOS
 
 ### Example 3: add subdirectories
 
+- Make a subdirectory `source/sim` and add two files `simulation.h` and `simulation.cpp` that are identical to Example 2.
+- Add `source/sim/CMakeLists.txt` with the following contents:
+  ```cmake
+  add_library(simulation simulation.cpp)
+  ```
+- Modify the contents of `source/CMakeLists.txt` as follows:
+  ```cmake
+  cmake_minimum_required(VERSION 3.19.0)
+
+  project(cmake_ros_study)
+
+  # ==============================================================================
+  # setup cmake
+
+  set(APP_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
+  set(APP_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+  set(APP_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
+  set(APP_LIBRARY_DIR ${APP_ROOT_DIR}/library)
+  set(APP_INSTALL_DIR ${APP_ROOT_DIR}/install)
+
+  # ==============================================================================
+  # library
+
+  add_subdirectory(sim)
+
+  # include_directories(${APP_SOURCE_DIR}/sim)
+
+  # ==============================================================================
+  # executable
+
+  add_executable(${PROJECT_NAME} main.cpp)
+  target_include_directories(${PROJECT_NAME}
+      PUBLIC "${APP_SOURCE_DIR}/sim"
+  )
+  target_link_directories(${PROJECT_NAME}
+      PUBLIC "${APP_BINARY_DIR}/sim"
+  )
+  target_link_libraries(${PROJECT_NAME}
+      PUBLIC simulation
+  )
+  install(
+      TARGETS ${PROJECT_NAME}
+      DESTINATION "${APP_INSTALL_DIR}"
+  )
+  ```
+- Build and install the program and check the directory structure:
+  ```
+  root/
+  |- build/
+      |- sim/
+          |- Makefile
+          |- libsimulation.a    # The library file name can be different for Linux and Windows.
+          |- ...
+      |- Makefile
+      |- cmake_ros_study
+      |- ...
+  |- install/
+      |- cmake_ros_study
+  |- source/
+      |- sim/
+          |- simulation.h
+          |- simulation.cpp
+      |- README.md
+      |- CMakeLists.txt
+      |- ...
+  ```
