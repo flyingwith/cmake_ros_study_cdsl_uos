@@ -109,17 +109,45 @@ configure_file(
     ${APP_SOURCE_DIR}/ros/package.xml
     ${APP_BINARY_DIR}/ros/src/${APP_NAME}/package.xml
 )
+set(MESSAGE_FILES
+    Num.msg
+)
+foreach(FILE ${MESSAGE_FILES})
+    configure_file(
+        ${APP_SOURCE_DIR}/ros/${FILE}
+        ${APP_BINARY_DIR}/ros/src/${APP_NAME}/msg/${FILE}
+    )
+endforeach()
+set(SERVICE_FILES
+    AddTwoInts.srv
+)
+foreach(FILE ${SERVICE_FILES})
+    configure_file(
+        ${APP_SOURCE_DIR}/ros/${FILE}
+        ${APP_BINARY_DIR}/ros/src/${APP_NAME}/srv/${FILE}
+    )
+endforeach()
+set(ACTION_FILES
+    Fibonacci.action
+    Averaging.action
+)
+foreach(FILE ${ACTION_FILES})
+    configure_file(
+        ${APP_SOURCE_DIR}/ros/${FILE}
+        ${APP_BINARY_DIR}/ros/src/${APP_NAME}/action/${FILE}
+    )
+endforeach()
 set(SOURCE_CPP_FILES
     chatter_talker.cpp
     chatter_listener.cpp
-    # add_two_ints_server.cpp
-    # add_two_ints_client.cpp
-    # fibonacci_server.cpp
-    # fibonacci_client.cpp
-    # fibonacci_client_callback.cpp
-    # fibonacci_client_callback_class.cpp
-    # averaging_server.cpp
-    # averaging_client.cpp
+    add_two_ints_server.cpp
+    add_two_ints_client.cpp
+    fibonacci_server.cpp
+    fibonacci_client.cpp
+    fibonacci_client_callback.cpp
+    fibonacci_client_callback_class.cpp
+    averaging_server.cpp
+    averaging_client.cpp
 )
 foreach(FILE ${SOURCE_CPP_FILES})
     configure_file(
@@ -127,19 +155,38 @@ foreach(FILE ${SOURCE_CPP_FILES})
         ${APP_BINARY_DIR}/ros/src/${APP_NAME}/src/${FILE}
     )
 endforeach()
+set(SOURCE_PYTHON_FILES
+    chatter_talker.py
+    chatter_listener.py
+    add_two_ints_server.py
+    add_two_ints_client.py
+    fibonacci_server.py
+    fibonacci_client.py
+    averaging_random_number_generator.py
+)
+foreach(FILE ${SOURCE_PYTHON_FILES})
+    configure_file(
+        ${APP_SOURCE_DIR}/ros/${FILE}
+        ${APP_BINARY_DIR}/ros/src/${APP_NAME}/scripts/${FILE}
+    )
+execute_process(
+    COMMAND chmod +x ${FILE}
+    WORKING_DIRECTORY ${APP_BINARY_DIR}/ros/src/${APP_NAME}/scripts
+)
+endforeach()
 set(LAUNCH_FILES
-    # chatter.launch
+    chatter.launch
     chatter_cpp.launch
-    # chatter_py.launch
-    # add_two_ints.launch
-    # add_two_ints_cpp.launch
-    # add_two_ints_py.launch
-    # fibonacci_cpp.launch
-    # fibonacci_py.launch
-    # fibonacci.launch
-    # fibonacci_callback.launch
-    # fibonacci_callback_class.launch
-    # averaging.launch
+    chatter_py.launch
+    add_two_ints.launch
+    add_two_ints_cpp.launch
+    add_two_ints_py.launch
+    fibonacci_cpp.launch
+    fibonacci_py.launch
+    fibonacci.launch
+    fibonacci_callback.launch
+    fibonacci_callback_class.launch
+    averaging.launch
 )
 foreach(FILE ${LAUNCH_FILES})
     configure_file(
@@ -153,10 +200,10 @@ foreach(FILE ${LAUNCH_FILES})
 endforeach()
 set(TEST_FILES
     chatter
-    # add_two_ints
-    # fibonacci
-    # fibonacci_callback
-    # fibonacci_callback_class
+    add_two_ints
+    fibonacci
+    fibonacci_callback
+    fibonacci_callback_class
 )
 foreach(FILE ${TEST_FILES})
     configure_file(
@@ -169,7 +216,7 @@ foreach(FILE ${TEST_FILES})
     )
 endforeach()
 
-# ==============================================================================
+# ------------------------------------------------------------------------------
 # configure the ROS package
 
 file(

@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="${APP_NAME}" name="fibonacci_server" type="fibonacci_server.py" output="screen" />
+    <node pkg="${APP_NAME}" name="fibonacci_client" type="fibonacci_client.py" output="screen" />
+    <node pkg="rostopic" name="fibonacci_feedback" type="rostopic" args="echo /fibonacci/feedback" output="screen" />
+    <node pkg="rostopic" name="fibonacci_result" type="rostopic" args="echo /fibonacci/result" output="screen" />
+</launch>
