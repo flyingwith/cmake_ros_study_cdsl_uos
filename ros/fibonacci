@@ -1,5 +1,0 @@
-#!${APP_SHELL_EXE}
-source ${APP_CONDA_DIR}/etc/profile.d/conda.sh &&
-conda activate ${APP_ROS_DIR} &&
-source ${APP_INSTALL_DIR}/ros/setup.${APP_SHELL_TYPE} &&
-roslaunch ${APP_NAME} fibonacci.launch
