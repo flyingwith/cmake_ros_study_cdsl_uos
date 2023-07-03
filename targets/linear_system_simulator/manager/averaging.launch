@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="${TARGET_NAME}_manager" name="averaging_server" type="averaging_server" output="screen" />
+    <node pkg="${TARGET_NAME}_manager" name="averaging_client" type="averaging_client" output="screen" />
+    <node pkg="${TARGET_NAME}_manager" name="averaging_random_number_generator" type="averaging_random_number_generator.py" output="screen" />
+    <node pkg="rostopic" name="averaging_feedback" type="rostopic" args="echo /averaging/feedback" output="screen" />
+    <node pkg="rostopic" name="averaging_result" type="rostopic" args="echo /averaging/result" output="screen" />
+</launch>

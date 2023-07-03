@@ -1,0 +1,6 @@
+<launch>
+    <arg name="x"/>
+    <arg name="y"/>
+    <node pkg="${APP_INTERFACE_NAME}" name="add_two_ints_server" type="add_two_ints_server" output="screen" />
+    <node pkg="${APP_INTERFACE_NAME}" name="add_two_ints_client" type="add_two_ints_client" args="$(arg x) $(arg y)" output="screen" />
+</launch>

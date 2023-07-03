@@ -1,0 +1,19 @@
+name: ${APP_NAME}_conda_env
+channels:
+    - defaults
+    - conda-forge
+    - menpo # ffmpeg
+dependencies:
+    - python=3.9
+    - cython
+    - numpy
+    - mpmath
+    - scipy
+    - matplotlib
+    - pyopengl
+    - pyqt
+    - pandas
+    - ffmpeg # save animations using matplotlib.animation.FFMpegWriter
+    - ipython
+    - notebook # jupyter notebook
+    - pip

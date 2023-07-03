@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="${APP_INTERFACE_NAME}" name="chatter_talker" type="chatter_talker.py" output="screen" />
+    <node pkg="${APP_INTERFACE_NAME}" name="chatter_listener" type="chatter_listener.py" output="screen" />
+</launch>

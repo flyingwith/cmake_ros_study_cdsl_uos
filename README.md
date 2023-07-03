@@ -393,6 +393,70 @@ CMake and ROS Study on CDSL of UOS
   $ make install
   ```
 
-  ## ROS Study
+## ROS Study
 
-  
+## Python Study
+
+- [Python Tutorial](https://docs.python.org/3/tutorial/)
+- [Python Tutorial 2](https://www.w3schools.com/python/)
+
+### Install Python using Pip/Conda/Mamba
+
+- [PIP Tutorial](https://docs.python.org/3/tutorial/venv.html)
+- Conda/Mamba
+  - Create the conda env and install packages
+    - Final directory Structure
+      ```
+      my_folder/
+      |- my_env/     # conda environment
+      |- conda_env.yml
+      ```
+    - Prepare a yaml file: `conda_env.yml`
+      ```yml
+      name: my_env
+      channels:
+          - defaults
+          - conda-forge
+          - menpo # ffmpeg
+      dependencies:
+          - python=3.9
+          - numpy
+          - mpmath
+          - scipy
+          - matplotlib>=3.3.2
+          - pyopengl
+          - pyqt
+          - pandas
+          - psutil>=5.8
+          - ffmpeg # save animations using matplotlib.animation.FFMpegWriter
+          - ipython
+          - notebook # jupyter notebook
+          - deepdiff # pick up the difference between dictionaries, iterables, strings and other objects.
+          - pip # PyPA recommended tool for installing Python packages
+          # - yaml # It does not install correctly. `conda install pyyaml` should be used instead.
+          - roslibpy # python ros bridge library
+          - eigen
+          - boost
+      ```
+    - Open the terminal and go to `my_folder`.
+    - Run the following command:
+      ```
+      $ conda env create -f conda_env.yml -p my_env
+      ```
+    - Activate `my_env`
+      ```
+      $ conda activate path/to/my_env
+      ```
+      or
+      ```
+      $ cd path/to/my_folder
+      $ conda activate ./my_env
+      ```
+  - Install packages to the existing conda env
+    - All processes are same as before.
+    - Run the following command
+      ```
+      $ cd path/to/my_folder
+      $ conda activate ./my_env
+      $ conda env update -f conda_env.yml -p my_env --prune
+      ```

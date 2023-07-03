@@ -1,0 +1,6 @@
+<launch>
+    <arg name="x"/>
+    <arg name="y"/>
+    <node pkg="${TARGET_NAME}_manager" name="add_two_ints_server" type="add_two_ints_server" output="screen" />
+    <node pkg="${TARGET_NAME}_manager" name="add_two_ints_client" type="add_two_ints_client.py" args="$(arg x) $(arg y)" output="screen" />
+</launch>
