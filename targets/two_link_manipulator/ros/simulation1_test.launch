@@ -1,0 +1,5 @@
+<launch>
+    <arg name="data_dir_name" />
+    <node pkg="${TARGET_ROS_NAME}" name="simulation1_server" type="simulation1_server" output="screen" />
+    <node pkg="${TARGET_ROS_NAME}" name="simulation1_client" type="simulation1_client.py" args="$(arg data_dir_name)" output="screen" />
+</launch>

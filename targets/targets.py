@@ -6,7 +6,7 @@ from pathlib import Path
 class Targets:
     def __init__(self, targets_root_dir=None):
         if targets_root_dir == None:
-            self.targets_root_dir = str(Path('${APP_BINARY_DIR}')/'targets')
+            self.targets_root_dir = str(Path('${APP_INSTALL_DIR}')/'targets')
         else:
             self.targets_root_dir = targets_root_dir
         ##@brief total number of targets
@@ -24,36 +24,36 @@ class Targets:
                     'parameter.xml'
                 )
             )
-    def openProgram(self, programId):
-        if programId < 0 or programId >= self.MAX_ID:
-            return False
-        cmd = str(Path(self.targets_root_dir)/
-                  self.DIR_NAME[programId]/
-                  'main'/
-                  (self.DIR_NAME[programId]+'_main')
-              )
-        if os.name == 'nt':
-            cmd += '.exe'
-        try:
-            subprocess.Popen(cmd)
-        except:
-            return False
-        return True
-    def closeProgram(self, programId):
-        if programId < 0 or programId >= self.MAX_ID:
-            return False
-        ret = False
-        proc_name_main = self.DIR_NAME[programId]+'_main'
-        proc_name_task = self.DIR_NAME[programId]+'_task'
-        if os.name == 'nt':
-            proc_name_main += '.exe'
-            proc_name_task += '.exe'
-        proc_name = [proc_name_main, proc_name_task]
-        for proc in psutil.process_iter():
-            if proc.status() != psutil.STATUS_ZOMBIE and proc.name() in proc_name:
-                try:
-                    proc.kill()
-                    ret = True
-                except:
-                    return False
-        return ret
+    # def openTarget(self, targetId):
+    #     if targetId < 0 or targetId >= self.MAX_ID:
+    #         return False
+    #     cmd = str(Path(self.targets_root_dir)/
+    #               self.DIR_NAME[targetId]/
+    #               'main'/
+    #               (self.DIR_NAME[targetId]+'_main')
+    #           )
+    #     if os.name == 'nt':
+    #         cmd += '.exe'
+    #     try:
+    #         subprocess.Popen(cmd)
+    #     except:
+    #         return False
+    #     return True
+    # def closeTarget(self, targetId):
+    #     if targetId < 0 or targetId >= self.MAX_ID:
+    #         return False
+    #     ret = False
+    #     proc_name_main = self.DIR_NAME[targetId]+'_main'
+    #     proc_name_task = self.DIR_NAME[targetId]+'_task'
+    #     if os.name == 'nt':
+    #         proc_name_main += '.exe'
+    #         proc_name_task += '.exe'
+    #     proc_name = [proc_name_main, proc_name_task]
+    #     for proc in psutil.process_iter():
+    #         if proc.status() != psutil.STATUS_ZOMBIE and proc.name() in proc_name:
+    #             try:
+    #                 proc.kill()
+    #                 ret = True
+    #             except:
+    #                 return False
+    #     return ret

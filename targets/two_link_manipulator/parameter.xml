@@ -1,0 +1,27 @@
+<param>
+    <info launch="simulation1" />
+    <simulation1>
+        <!-- system -->
+        <l1>0.55</l1>
+        <l2>0.45</l2>
+        <m1>10</m1>
+        <m2>5</m2>
+        <gc>9.81</gc>
+        <!-- reference -->
+        <s0>1.0</s0>
+        <r0>0.1,0.1</r0>
+        <!-- control -->
+        <Kp>100,0,0,100</Kp>
+        <Kd>10,0,0,10</Kd>
+        <l1_e>0.55</l1_e>
+        <l2_e>0.45</l2_e>
+        <m1_e>10</m1_e>
+        <m2_e>5</m2_e>
+        <!-- simulation -->
+        <ts>0.001</ts>
+        <t0>0</t0>
+        <t1>3</t1>
+        <q0>0,0</q0>
+        <dq0>0,0</dq0>
+    </simulation1>
+</param>

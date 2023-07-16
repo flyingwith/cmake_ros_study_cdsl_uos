@@ -16,4 +16,5 @@ dependencies:
     - ffmpeg # save animations using matplotlib.animation.FFMpegWriter
     - ipython
     - notebook # jupyter notebook
+    - ipywidgets # jupyter widgets for gui
     - pip

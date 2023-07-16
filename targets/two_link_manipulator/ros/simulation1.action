@@ -1,0 +1,17 @@
+# goal
+string parameter
+---
+# result
+string message
+int32[] itr
+float64[] t
+float64[] q
+float64[] dq
+float64[] r
+float64[] e
+float64[] de
+float64[] v
+float64[] tau
+---
+# feedback
+string message

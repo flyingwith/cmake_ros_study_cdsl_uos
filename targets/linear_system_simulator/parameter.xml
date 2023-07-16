@@ -1,0 +1,24 @@
+<param>
+    <info launch="simulation1" />
+    <simulation1>
+        <!-- system -->
+        <n>2</n>
+        <m>1</m>
+        <p>1</p>
+        <A>0.0,1.0,0.0,0.0</A>
+        <B>0.0,1.0</B>
+        <C>1.0,0.0</C>
+        <!-- reference -->
+        <s0>1</s0>
+        <r0>1</r0>
+        <!-- control -->
+        <Kp>100</Kp>
+        <Kd>10</Kd>
+        <Ki>1</Ki>
+        <!-- simulation -->
+        <ts>0.001</ts>
+        <t0>0</t0>
+        <t1>3</t1>
+        <x0>0.0,0.0</x0>
+    </simulation1>
+</param>

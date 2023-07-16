@@ -17,7 +17,13 @@
 #include <iostream>
 #include <sstream> // stringstream
 #include <stdarg.h> // va_list, va_start, va_arg, va_end
+
+// Eigen
 #include "Eigen/Dense"
 using namespace Eigen;
+
+// QuadProg++
+// #include "Array.hh"
+// #include "QuadProg++.hh"
 
 #endif // APP_H

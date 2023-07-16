@@ -1,0 +1,27 @@
+<param>
+    <system>
+        <info name="dynamical system (attr)" >
+            <name>dynamical system</name>
+        </info>
+        <!-- state equation: dx = f(t,x,u,w1) -->
+        <!-- output equation: y = h(t,x,u,w2) -->
+        <!-- x: state / u: input / y: output / w1, w2: disturbance or noise -->
+        <dim x="10" u="5" y="4" w1="3" w2="2" />
+    </system>
+    <control>
+        <PID>
+            <!-- u = Kp*e + Kv*de + Ki*ie -->
+            <!-- e: error / de: derivative of error / ie: integral of error -->
+            <gains Kp="100" Kv="10" Ki="2" />
+        </PID>
+    </control>
+    <reference>
+        <line xi="0" yi="0" zi="0" xf="1" yf="1" zf="1" tp="3" />
+    </reference>
+    <launch>
+        <info type="task1" />
+        <task1>
+            <info control="PID" ti="0" tp="10" />
+        </task1>
+    </launch>
+</param>

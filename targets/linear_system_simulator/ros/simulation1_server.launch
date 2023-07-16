@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="${TARGET_ROS_NAME}" name="simulation1_server" type="simulation1_server" output="screen" />
+</launch>
